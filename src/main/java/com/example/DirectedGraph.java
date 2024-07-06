@@ -75,7 +75,7 @@ public class DirectedGraph {
 
         mxgraph.getModel().beginUpdate();
         try {
-            java.util.Map<String, Object> cells = new java.util.HashMap<>();
+            Map<String, Object> cells = new HashMap<>();
             for (String vertex : graph.vertexSet()) {
                 Object v = mxgraph.insertVertex(parent, null, vertex, 100, 100, 80, 30);
                 cells.put(vertex, v);
@@ -102,29 +102,28 @@ public class DirectedGraph {
         frame.setVisible(true);
     }
 
-// Functionality 3: Query bridge words between word1 and word2
-public String queryBridgeWords(String word1, String word2) {
-    if (!graph.containsVertex(word1) || !graph.containsVertex(word2)) {
-        return "No " + word1 + " or " + word2 + " in the graph!";
-    }
+    // Functionality 3: Query bridge words between word1 and word2
+    public String queryBridgeWords(String word1, String word2) {
+        if (!graph.containsVertex(word1) || !graph.containsVertex(word2)) {
+            return "No " + word1 + " or " + word2 + " in the graph!";
+        }
 
-    Set<String> bridgeWords = new HashSet<>();
-    Set<DefaultWeightedEdge> outgoingEdges = graph.outgoingEdgesOf(word1);
+        Set<String> bridgeWords = new HashSet<>();
+        Set<DefaultWeightedEdge> outgoingEdges = graph.outgoingEdgesOf(word1);
 
-    for (DefaultWeightedEdge edge : outgoingEdges) {
-        String neighbor = graph.getEdgeTarget(edge);
-        if (graph.containsEdge(neighbor, word2)) {
-            bridgeWords.add(neighbor);
+        for (DefaultWeightedEdge edge : outgoingEdges) {
+            String neighbor = graph.getEdgeTarget(edge);
+            if (graph.containsEdge(neighbor, word2)) {
+                bridgeWords.add(neighbor);
+            }
+        }
+
+        if (bridgeWords.isEmpty()) {
+            return "No bridge words from " + word1 + " to " + word2 + "!";
+        } else {
+            return "The bridge words from " + word1 + " to " + word2 + " are: " + String.join(", ", bridgeWords);
         }
     }
-
-    if (bridgeWords.isEmpty()) {
-        return "No bridge words from " + word1 + " to " + word2 + "!";
-    } else {
-        return "The bridge words from " + word1 + " to " + word2 + " are: " + String.join(", ", bridgeWords);
-    }
-}
-
 
     // Functionality 4: Generate new text with bridge words
     public String generateNewText(String inputText) {
@@ -186,7 +185,8 @@ public String queryBridgeWords(String word1, String word2) {
 
         double pathWeight = shortestPathAlgorithm.getPathWeight(word1, word2);
 
-        return "Shortest path from " + word1 + " to " + word2 + " is: " +
+        return "Shortest path from " + word1 + " to " + word2 + " is: " 
+        +
                 String.join("->", shortestPath) + ". Path weight: " + pathWeight;
     }
 
@@ -242,7 +242,7 @@ public String queryBridgeWords(String word1, String word2) {
         DirectedGraph directedGraph = new DirectedGraph();
 
         // Specify the path to your file here
-        String filePath = "C:\\Users\\osheenconstable\\directed-graph\\directed-graph\\text1.txt";
+        String filePath = "/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/text1.txt";
 
         directedGraph.buildGraphFromFile(filePath);
         directedGraph.displayGraph();

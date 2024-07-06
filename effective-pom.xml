@@ -11,12 +11,16 @@
 <!-- 'com.example:directed-graph:jar:1.0-SNAPSHOT'                          -->
 <!--                                                                        -->
 <!-- ====================================================================== -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example</groupId>
   <artifactId>directed-graph</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
+    <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
@@ -34,9 +38,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.9.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -48,41 +58,45 @@
   </dependencies>
   <repositories>
     <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
       <id>central</id>
-      <name>Central Repository</name>
       <url>https://repo.maven.apache.org/maven2</url>
     </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
       <id>central</id>
-      <name>Central Repository</name>
       <url>https://repo.maven.apache.org/maven2</url>
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <sourceDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\src\main\java</sourceDirectory>
-    <scriptSourceDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\src\main\scripts</scriptSourceDirectory>
-    <testSourceDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\src\test\java</testSourceDirectory>
-    <outputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\classes</outputDirectory>
-    <testOutputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\test-classes</testOutputDirectory>
+    <sourceDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/src/main/java</sourceDirectory>
+    <scriptSourceDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/src/main/scripts</scriptSourceDirectory>
+    <testSourceDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/src/test/java</testSourceDirectory>
+    <outputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/classes</outputDirectory>
+    <testOutputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/test-classes</testOutputDirectory>
     <resources>
       <resource>
-        <directory>C:\Users\osheenconstable\directed-graph\directed-graph\src\main\resources</directory>
+        <directory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/src/main/resources</directory>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>C:\Users\osheenconstable\directed-graph\directed-graph\src\test\resources</directory>
+        <directory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/src/test/resources</directory>
       </testResource>
     </testResources>
-    <directory>C:\Users\osheenconstable\directed-graph\directed-graph\target</directory>
+    <directory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target</directory>
     <finalName>directed-graph-1.0-SNAPSHOT</finalName>
     <pluginManagement>
       <plugins>
@@ -92,11 +106,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.7.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.6.1</version>
+          <version>3.7.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-release-plugin</artifactId>
@@ -121,6 +135,29 @@
         </executions>
         <configuration>
           <mainClass>com.example.DirectedGraph</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/*Test.java</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
         </configuration>
       </plugin>
       <plugin>
@@ -190,21 +227,8 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
-        <executions>
-          <execution>
-            <id>default-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <artifactId>maven-install-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.2</version>
         <executions>
           <execution>
             <id>default-install</id>
@@ -217,7 +241,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.2</version>
         <executions>
           <execution>
             <id>default-deploy</id>
@@ -239,7 +263,7 @@
               <goal>site</goal>
             </goals>
             <configuration>
-              <outputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\site</outputDirectory>
+              <outputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/site</outputDirectory>
               <reportPlugins>
                 <reportPlugin>
                   <groupId>org.apache.maven.plugins</groupId>
@@ -255,7 +279,7 @@
               <goal>deploy</goal>
             </goals>
             <configuration>
-              <outputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\site</outputDirectory>
+              <outputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/site</outputDirectory>
               <reportPlugins>
                 <reportPlugin>
                   <groupId>org.apache.maven.plugins</groupId>
@@ -266,7 +290,7 @@
           </execution>
         </executions>
         <configuration>
-          <outputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\site</outputDirectory>
+          <outputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/site</outputDirectory>
           <reportPlugins>
             <reportPlugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -278,6 +302,6 @@
     </plugins>
   </build>
   <reporting>
-    <outputDirectory>C:\Users\osheenconstable\directed-graph\directed-graph\target\site</outputDirectory>
+    <outputDirectory>/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/target/site</outputDirectory>
   </reporting>
 </project>

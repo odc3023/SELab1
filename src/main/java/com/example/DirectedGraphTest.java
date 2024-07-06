@@ -1,15 +1,19 @@
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.Test;
+package com.example;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.example.DirectedGraph;
 
 public class DirectedGraphTest {
 
     private DirectedGraph graph;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         graph = new DirectedGraph();
-        graph.buildGraphFromFile("C:\\Users\\osheenconstable\\directed-graph\\directed-graph\\text1.txt");
+        graph.buildGraphFromFile("/Volumes/[C] Windows 11/Users/osheenconstable/directed-graph/directed-graph/text1.txt");
     }
 
     @Test
@@ -27,3 +31,4 @@ public class DirectedGraphTest {
         assertEquals("No bridge words from walls to and!", graph.queryBridgeWords("walls", "and"));
     }
 }
+
